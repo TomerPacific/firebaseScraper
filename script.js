@@ -3,6 +3,7 @@ const url = "https://firebase-scraper.herokuapp.com/firebase";
 
 
 var xmlHttp = new XMLHttpRequest();
+xmlHttp.open("GET", url, true);
 xmlHttp.withCredentials = true;
 xmlHttp.setRequestHeader("Content-Type","application/json");
 xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "*");
@@ -12,5 +13,4 @@ xmlHttp.onreadystatechange = function() {
         console.log(xmlHttp.responseText);
 }
 
-xmlHttp.open("GET", url, true);
 xmlHttp.send(null);
