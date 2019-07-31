@@ -9,9 +9,10 @@ xmlHttp.setRequestHeader("Content-Type", "application/json");
 
 xmlHttp.onload = function() {
 	var responseText = xmlHttp.responseText;
-	let val = responseText.message;
+	let json = JSON.parse(responseText);
+	let msg = json.message;
 	let liElem = document.createElement("li");
-	liElem.innerHTML = val;
+	liElem.innerHTML = msg;
 	productsList.appendChild(liElem);
 };
 
