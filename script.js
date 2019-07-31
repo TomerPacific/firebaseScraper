@@ -4,6 +4,7 @@ const url = "https://firebase-scraper.herokuapp.com/firebase";
 
 var xmlHttp = new XMLHttpRequest();
 xmlHttp.open("GET", url, true);
+xmlhttp.setRequestHeader("Content-Type", "application/json");
 
 xmlHttp.onload = function() {
 	console.log('onload');
@@ -12,7 +13,7 @@ xmlHttp.onload = function() {
 };
 
 xmlHttp.onerror = function() {
-	console.error("Error");
+	console.log("Error");
 };
 
 xmlHttp.send();
