@@ -19,15 +19,15 @@ xmlHttp.onload = function() {
 	for (let i = 0; i < msg.length; i++) {
 		let liElem = document.createElement("li");
 		liElem.innerHTML = "Product : " + msg[i].name + " Status " + msg[i].status;
-
-		if (msg[i].status.includes('ok')) {
+		console.log(msg[i].status);
+		if (msg[i].status.indexOf('ok') !== -1) {
 			liElem.setAttribute('class', 'ok');
-		} else if (msg[i].status.includes('medium')) {
+		} else if (msg[i].status.indexOf('medium') !== -1) {
 			liElem.setAttribute('class', 'medium');
 		} else {
 			liElem.setAttribute('class', 'high');
 		}
-		
+
 		productsList.appendChild(liElem);
 	}
 	
