@@ -1,6 +1,5 @@
 let productsList = document.getElementById("products");
 
-
 const url = "https://firebase-scraper.herokuapp.com/firebase";
 
 var xmlHttp = new XMLHttpRequest();
@@ -9,11 +8,21 @@ xmlHttp.setRequestHeader("Content-Type", "application/json");
 
 xmlHttp.onload = function() {
 	var responseText = xmlHttp.responseText;
+	if (!responseText) {
+		return;
+	}
+
+	productsList.innerHTML = '';
+	
 	let json = JSON.parse(responseText);
 	let msg = json.message;
-	let liElem = document.createElement("li");
-	liElem.innerHTML = msg;
-	productsList.appendChild(liElem);
+	for (let i = 0; i < msg.length; i++) {
+		let liElem = document.createElement("li");
+		liElem.innerHTML = "Product : " + msg[i].name + " Status " + msg[i].status;
+		productsList.appendChild(liElem);
+	}
+	
+	
 };
 
 xmlHttp.onerror = function() {
