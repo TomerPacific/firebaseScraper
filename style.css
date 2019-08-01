@@ -5,3 +5,15 @@
 #products {
 	list-style: none;
 }
+
+.ok {
+	background-color: #0da960;
+}
+
+.medium {
+	background-color: #ff9800;
+}
+
+.high {
+	background-color: rgb(255,51,0);
+}

@@ -13,12 +13,21 @@ xmlHttp.onload = function() {
 	}
 
 	productsList.innerHTML = '';
-	
+
 	let json = JSON.parse(responseText);
 	let msg = json.message;
 	for (let i = 0; i < msg.length; i++) {
 		let liElem = document.createElement("li");
 		liElem.innerHTML = "Product : " + msg[i].name + " Status " + msg[i].status;
+
+		if (msg[i].status.includes('ok')) {
+			liElem.setAttribute('class', 'ok');
+		} else if (msg[i].status.includes('medium')) {
+			liElem.setAttribute('class', 'medium');
+		} else {
+			liElem.setAttribute('class', 'high');
+		}
+		
 		productsList.appendChild(liElem);
 	}
 	
