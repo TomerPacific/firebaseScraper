@@ -5,6 +5,7 @@ const rp = require('request-promise');
 const cheerio = require('cheerio');
 var port = process.env.PORT || 3000;
 var app = express();
+var lastDateScraped;
 
 const url = "https://status.firebase.google.com";
 
@@ -25,35 +26,47 @@ app.use(cors({
 
 app.get('/firebase', function (req, res) {
  
- rp(url)
-  .then(function(html){
-     let products = [];
-     let product = {};
+  if (enoughDaysHavePassed()) {
+      rp(url)
+    .then(function(html){
+       let products = [];
+       let product = {};
 
-    let services = cheerio('.service-status', html);
-    for (let i = 0; i < services.length; i++) {
-      let service = services[i].children[0].data.trim();
-      if (service === 'Cloud Firestore') {
-        continue;
+      let services = cheerio('.service-status', html);
+      for (let i = 0; i < services.length; i++) {
+        let service = services[i].children[0].data.trim();
+        if (service === 'Cloud Firestore') {
+          continue;
+        }
+
+        product.name = service;
+        products.push(product);
+        product = {};
       }
 
-      product.name = service;
-      products.push(product);
-      product = {};
-    }
-
-    let statuses = cheerio('.end-bubble', html);
-    for (let i = 0; i < products.length; i++) {
-      products[i].status = statuses[i].attribs.class;
-    }
-
+      let statuses = cheerio('.end-bubble', html);
+      for (let i = 0; i < products.length; i++) {
+        products[i].status = statuses[i].attribs.class;
+      }
+      lastDateScraped = new Date();
+      res.status(200).json({ message: products});
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+  } else {
     res.status(200).json({ message: products});
-  })
-  .catch(function(err){
-  	console.log(err);
-  });
+  }
 });
 
+
+function enoughDaysHavePassed() {
+  
+  let timeDifference = new Date().getTime() - lastDateScraped.getTime();
+  let dayDifference = Math.floor(timeDifference / 1000*60*60*24);
+
+  return dayDifference > 7;
+}
 
 app.listen(port, function () {
  console.log('Example app listening on port ' + port);
