@@ -18,8 +18,7 @@ xmlHttp.onload = function() {
 	let msg = json.message;
 	for (let i = 0; i < msg.length; i++) {
 		let liElem = document.createElement("li");
-		liElem.innerHTML = "Product : " + msg[i].name + " Status " + msg[i].status;
-		console.log(msg[i].status);
+		liElem.innerHTML = "<strong>" + msg[i].name + "</strong> Status " + msg[i].status;
 		if (msg[i].status.indexOf('ok') !== -1) {
 			liElem.setAttribute('class', 'ok');
 		} else if (msg[i].status.indexOf('medium') !== -1) {
