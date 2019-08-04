@@ -63,6 +63,10 @@ app.get('/firebase', function (req, res) {
 
 function enoughDaysHavePassed() {
   
+  if (!lastDateScraped) {
+    return true;
+  }
+  
   let timeDifference = new Date().getTime() - lastDateScraped.getTime();
   let dayDifference = Math.floor(timeDifference / 1000*60*60*24);
 
