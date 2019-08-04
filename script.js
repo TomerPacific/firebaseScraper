@@ -19,7 +19,8 @@ xmlHttp.onload = function() {
 	for (let i = 0; i < msg.length; i++) {
 		let liElem = document.createElement("li");
 		let iconElem = document.createElement("i");
-		let productName = "<strong>" + msg[i].name + "</strong>";
+		let p = document.createElement("p");
+		p.innerHTML = "<strong>" + msg[i].name + "</strong>";
 		if (msg[i].status.indexOf('ok') !== -1) {
 			liElem.setAttribute('class', 'ok');
 			iconElem.setAttribute('class', 'fas fa-check');
@@ -31,8 +32,9 @@ xmlHttp.onload = function() {
 			liElem.setAttribute('class', 'high');
 			iconElem.setAttribute('class', 'fas fa-times');
 		}
-		
-		liElem.innerHTML = productName + iconElem;
+
+		liElem.appendChild(p);
+		liElem.appendChild(iconElem);
 		productsList.appendChild(liElem);
 	}
 	
