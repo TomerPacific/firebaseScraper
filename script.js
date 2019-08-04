@@ -18,15 +18,21 @@ xmlHttp.onload = function() {
 	let msg = json.message;
 	for (let i = 0; i < msg.length; i++) {
 		let liElem = document.createElement("li");
-		liElem.innerHTML = "<strong>" + msg[i].name + "</strong> Status " + msg[i].status;
+		let iconElem = document.createElement("i");
+		let productName = "<strong>" + msg[i].name + "</strong>";
 		if (msg[i].status.indexOf('ok') !== -1) {
 			liElem.setAttribute('class', 'ok');
+			iconElem.setAttribute('class', 'fas fa-check');
+			
 		} else if (msg[i].status.indexOf('medium') !== -1) {
 			liElem.setAttribute('class', 'medium');
+			iconElem.setAttribute('class', 'fas fa-exclamation');
 		} else {
 			liElem.setAttribute('class', 'high');
+			iconElem.setAttribute('class', 'fas fa-times');
 		}
-
+		
+		liElem.innerHTML = productName + iconElem;
 		productsList.appendChild(liElem);
 	}
 	
