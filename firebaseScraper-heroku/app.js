@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
+const daysPassedToScrapeAgain = 7;
 var port = process.env.PORT || 3000;
 var app = express();
 var lastDateScraped;
@@ -65,7 +66,7 @@ function enoughDaysHavePassed() {
   let timeDifference = new Date().getTime() - lastDateScraped.getTime();
   let dayDifference = Math.floor(timeDifference / 1000*60*60*24);
 
-  return dayDifference > 7;
+  return dayDifference > daysPassedToScrapeAgain;
 }
 
 app.listen(port, function () {
