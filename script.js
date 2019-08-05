@@ -1,6 +1,6 @@
 let productsList = document.getElementById("products");
 let mainDiv = document.getElementById("main");
-let loader = document.getElementById("loader");
+let loader = document.getElementsByClassName("loader")[0];
 
 const url = "https://firebase-scraper.herokuapp.com/firebase";
 
