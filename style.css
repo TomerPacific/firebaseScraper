@@ -11,13 +11,13 @@ h1, h2 {
 }
 
 .ok {
-	background-color: #0da960;
+	color: #0da960;
 }
 
 .medium {
-	background-color: #ff9800;
+	color: #ff9800;
 }
 
 .high {
-	background-color: rgb(255,51,0);
+	color: rgb(255,51,0);
 }

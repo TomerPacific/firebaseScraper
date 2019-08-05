@@ -32,9 +32,8 @@ xmlHttp.onload = function() {
 			liElem.setAttribute('class', 'high');
 			iconElem.setAttribute('class', 'fas fa-times');
 		}
-
+		p.appendChild(iconElem);
 		liElem.appendChild(p);
-		liElem.appendChild(iconElem);
 		productsList.appendChild(liElem);
 	}
 	
