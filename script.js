@@ -1,4 +1,6 @@
 let productsList = document.getElementById("products");
+let mainDiv = document.getElementById("main");
+let loader = document.getElementById("loader");
 
 const url = "https://firebase-scraper.herokuapp.com/firebase";
 
@@ -36,7 +38,9 @@ xmlHttp.onload = function() {
 		liElem.appendChild(p);
 		productsList.appendChild(liElem);
 	}
-	
+
+	mainDiv.style.display = "block";
+	loader.style.display = "none";
 	
 };
 
