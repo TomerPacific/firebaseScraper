@@ -16,6 +16,8 @@ xmlHttp.onload = function() {
 
 	productsList.innerHTML = '';
 
+	mainDiv.style.display = "block";
+
 	let json = JSON.parse(responseText);
 	let msg = json.message;
 	for (let i = 0; i < msg.length; i++) {
@@ -24,14 +26,14 @@ xmlHttp.onload = function() {
 		let p = document.createElement("p");
 		p.innerHTML = "<strong>" + msg[i].name + "</strong>";
 		if (msg[i].status.indexOf('ok') !== -1) {
-			liElem.setAttribute('class', 'ok');
+			liElem.setAttribute('class', 'ok fade');
 			iconElem.setAttribute('class', 'fas fa-check');
 			
 		} else if (msg[i].status.indexOf('medium') !== -1) {
-			liElem.setAttribute('class', 'medium');
+			liElem.setAttribute('class', 'medium fade');
 			iconElem.setAttribute('class', 'fas fa-exclamation');
 		} else {
-			liElem.setAttribute('class', 'high');
+			liElem.setAttribute('class', 'high fade');
 			iconElem.setAttribute('class', 'fas fa-times');
 		}
 		p.appendChild(iconElem);
@@ -39,7 +41,6 @@ xmlHttp.onload = function() {
 		productsList.appendChild(liElem);
 	}
 
-	mainDiv.style.display = "block";
 	loader[0].style.display = "none";
 	
 };
