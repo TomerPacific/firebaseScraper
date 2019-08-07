@@ -39,6 +39,9 @@ xmlHttp.onload = function() {
 		p.appendChild(iconElem);
 		liElem.appendChild(p);
 		productsList.appendChild(liElem);
+
+		liElem.classList.remove('fade');
+		liElem.classList.add('show');
 	}
 
 	loader[0].style.display = "none";
