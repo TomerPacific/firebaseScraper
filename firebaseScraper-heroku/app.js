@@ -49,6 +49,15 @@ app.get('/firebase', function (req, res) {
       for (let i = 0; i < products.length; i++) {
         products[i].status = statuses[i].attribs.class;
       }
+
+      let links = cheerio('td a', html);
+      let incidents = [];
+      for (let i = 0; i < links.length; i++) {
+        if (links[i] &&  links[i].href && links[i].href.indexOf('incident') !== -1) {
+          incidents.push(links[i]);
+        }
+      }
+
       lastDateScraped = new Date();
       res.status(200).json({ message: products});
     })
