@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
-const daysPassedToScrapeAgain = 7;
+const daysPassedToScrapeAgain = 1;
 var port = process.env.PORT || 3000;
 var app = express();
 var lastDateScraped;
