@@ -48,23 +48,21 @@ app.get('/firebase', function (req, res) {
           product = {};
         }
 
-      // let baseDay = '11';
-      // let currentColumn = '2';
-
-      // let dayColumn2 = cheerio('.day.col2', html);
-      // for(let i = 0; i < dayColumn2.length; i++) {
-      //   let children = dayColumn2[i].children;
-      //   let incidentReportIndex = findAnchorTag(children);
-      //   if (incidentReportIndex !== -1) {
-      //     let incidentReport = children[incidentReportIndex];
-      //     let incident = {};
-      //     incident.day = baseDay + currentColumn;
-      //     incident.link = incidentReport.attribs.href;
-      //     products[incidentReportIndex].incidents.push(incident);
-      //     incident = {};
-      //   }
-      // }
-
+      for(let i = 1; i < 8; i++) {
+         let dayColumn = cheerio('.day.col'+i, html);
+          for(let j = 0; j < dayColumn.length; j++) {
+            let children = dayColumn[j].children;
+            let incidentReportIndex = findAnchorTag(children);
+            if (incidentReportIndex !== -1) {
+              let incidentReport = children[incidentReportIndex];
+              let incident = {};
+              incident.day = parseInt(currentStartDate.startDate) + i - 1;
+              incident.link = incidentReport.attribs.href;
+              products[incidentReportIndex].incidents.push(incident);
+              incident = {};
+            }
+          }
+      }
 
       let statuses = cheerio('.end-bubble', html);
       for (let i = 0; i < products.length; i++) {
