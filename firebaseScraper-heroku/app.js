@@ -33,17 +33,38 @@ app.get('/firebase', function (req, res) {
        let products = [];
        let product = {};
 
-      let services = cheerio('.service-status', html);
-      for (let i = 0; i < services.length; i++) {
-        let service = services[i].children[0].data.trim();
-        if (service === 'Cloud Firestore') {
-          continue;
+       let currentStartDate = getStartDate(html);
+
+        let services = cheerio('.service-status', html);
+        for (let i = 0; i < services.length; i++) {
+          let service = services[i].children[0].data.trim();
+          if (service === 'Cloud Firestore') {
+            continue;
+          }
+
+          product.name = service;
+          product.incidents = [];
+          products.push(product);
+          product = {};
         }
 
-        product.name = service;
-        products.push(product);
-        product = {};
-      }
+      // let baseDay = '11';
+      // let currentColumn = '2';
+
+      // let dayColumn2 = cheerio('.day.col2', html);
+      // for(let i = 0; i < dayColumn2.length; i++) {
+      //   let children = dayColumn2[i].children;
+      //   let incidentReportIndex = findAnchorTag(children);
+      //   if (incidentReportIndex !== -1) {
+      //     let incidentReport = children[incidentReportIndex];
+      //     let incident = {};
+      //     incident.day = baseDay + currentColumn;
+      //     incident.link = incidentReport.attribs.href;
+      //     products[incidentReportIndex].incidents.push(incident);
+      //     incident = {};
+      //   }
+      // }
+
 
       let statuses = cheerio('.end-bubble', html);
       for (let i = 0; i < products.length; i++) {
@@ -61,6 +82,24 @@ app.get('/firebase', function (req, res) {
   }
 });
 
+
+function getStartDate(html) {
+  let monthSpan = cheerio('.month', html);
+  let month = monthSpan[0].children[0].data;
+  let startDate = monthSpan[0].next.data.trim();
+  return {'month': month, 'startDate': startDate};
+}
+
+
+function findAnchorTag(elements) {
+  for(let i = 0; i < elements.length; i++) {
+    if (elements[i].name === 'a') {
+      return i;
+    }
+  }
+
+  return -1;
+}
 
 function enoughDaysHavePassed() {
   
