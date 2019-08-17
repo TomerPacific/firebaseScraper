@@ -4,6 +4,7 @@ var cors = require('cors');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 const daysPassedToScrapeAgain = 1;
+const amountOfColumns = 8;
 var port = process.env.PORT || 3000;
 var app = express();
 var lastDateScraped;
@@ -48,7 +49,7 @@ app.get('/firebase', function (req, res) {
           product = {};
         }
 
-      for(let i = 1; i < 8; i++) {
+      for(let i = 1; i < amountOfColumns; i++) {
          let dayColumn = cheerio('.day.col'+i, html);
           for(let j = 0; j < dayColumn.length; j++) {
             let children = dayColumn[j].children;
