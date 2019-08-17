@@ -3,6 +3,8 @@ let mainDiv = document.getElementById("main");
 let loader = document.getElementsByClassName("loader");
 let dateHeader = document.getElementById('date');
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 const url = "https://firebase-scraper.herokuapp.com/firebase";
 
 var xmlHttp = new XMLHttpRequest();
@@ -19,8 +21,7 @@ xmlHttp.onload = function() {
 
 	mainDiv.style.display = "block";
 
-	dateHeader.innerHTML = "For the day of : " + new Date().toString();
-	dateHeader.style.display = "block";
+	setCurrentDate();
 
 	let json = JSON.parse(responseText);
 	let msg = json.message;
@@ -57,3 +58,10 @@ xmlHttp.onerror = function() {
 };
 
 xmlHttp.send();
+
+
+function setCurrentDate() {
+	var currentDate = new Date();
+	dateHeader.innerHTML = "For the day of : " + months[currentDate.getMonth()] + currentDate.getDate() + currentDate.getFullYear();
+	dateHeader.style.display = "block";
+}
