@@ -1,6 +1,7 @@
 let productsList = document.getElementById("products");
 let mainDiv = document.getElementById("main");
 let loader = document.getElementsByClassName("loader");
+let dateHeader = document.getElementById('date');
 
 const url = "https://firebase-scraper.herokuapp.com/firebase";
 
@@ -17,6 +18,9 @@ xmlHttp.onload = function() {
 	productsList.innerHTML = '';
 
 	mainDiv.style.display = "block";
+
+	dateHeader.innerHTML = "For the day of : " + new Date().toString();
+	dateHeader.style.display = "block";
 
 	let json = JSON.parse(responseText);
 	let msg = json.message;
