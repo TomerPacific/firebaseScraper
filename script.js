@@ -62,6 +62,6 @@ xmlHttp.send();
 
 function setCurrentDate() {
 	var currentDate = new Date();
-	dateHeader.innerHTML = "For the day of : " + months[currentDate.getMonth()] + currentDate.getDate() + currentDate.getFullYear();
+	dateHeader.innerHTML = "For the day of : " + months[currentDate.getMonth()] + ' ' + currentDate.getDate() + ' ' + currentDate.getFullYear();
 	dateHeader.style.display = "block";
 }
