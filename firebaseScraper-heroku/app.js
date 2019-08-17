@@ -49,21 +49,7 @@ app.get('/firebase', function (req, res) {
           product = {};
         }
 
-      for(let i = 1; i < amountOfColumns; i++) {
-         let dayColumn = cheerio('.day.col'+i, html);
-          for(let j = 0; j < dayColumn.length; j++) {
-            let children = dayColumn[j].children;
-            let incidentReportIndex = findAnchorTag(children);
-            if (incidentReportIndex !== -1) {
-              let incidentReport = children[incidentReportIndex];
-              let incident = {};
-              incident.day = parseInt(currentStartDate.startDate) + i - 1;
-              incident.link = incidentReport.attribs.href;
-              products[incidentReportIndex].incidents.push(incident);
-              incident = {};
-            }
-          }
-      }
+      populateIncidents(html, products, currentStartDate);
 
       let statuses = cheerio('.end-bubble', html);
       for (let i = 0; i < products.length; i++) {
@@ -80,6 +66,25 @@ app.get('/firebase', function (req, res) {
     res.status(200).json({ message: products});
   }
 });
+
+function populateIncidents(html, products, currentStartDate) {
+  
+  for(let i = 1; i < amountOfColumns; i++) {
+         let dayColumn = cheerio('.day.col'+i, html);
+          for(let j = 0; j < dayColumn.length; j++) {
+            let children = dayColumn[j].children;
+            let incidentReportIndex = findAnchorTag(children);
+            if (incidentReportIndex !== -1) {
+              let incidentReport = children[incidentReportIndex];
+              let incident = {};
+              incident.day = parseInt(currentStartDate.startDate) + i - 1;
+              incident.link = incidentReport.attribs.href;
+              products[incidentReportIndex].incidents.push(incident);
+              incident = {};
+            }
+          }
+      }
+}
 
 
 function getStartDate(html) {
