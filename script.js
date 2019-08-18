@@ -28,7 +28,7 @@ xmlHttp.onload = function() {
 		return;
 	}
 
-	let msg = json.message;
+	let msg = data.message;
 	for (let i = 0; i < msg.length; i++) {
 		let liElem = document.createElement("li");
 		let iconElem = document.createElement("i");
