@@ -23,7 +23,11 @@ xmlHttp.onload = function() {
 
 	setCurrentDate();
 
-	let json = JSON.parse(responseText);
+	let data = parseJson(responseText);
+	if (!data) {
+		return;
+	}
+
 	let msg = json.message;
 	for (let i = 0; i < msg.length; i++) {
 		let liElem = document.createElement("li");
@@ -59,6 +63,17 @@ xmlHttp.onerror = function() {
 
 xmlHttp.send();
 
+
+function parseJson(json) {
+	let data = null;
+	try {
+		data = JSON.parse(json);
+	} catch (Exception e) {
+		console.error("JSON parse error " + e.message);
+	}
+
+	return data;
+}
 
 function setCurrentDate() {
 	var currentDate = new Date();
