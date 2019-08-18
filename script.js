@@ -68,7 +68,7 @@ function parseJson(json) {
 	let data = null;
 	try {
 		data = JSON.parse(json);
-	} catch (Exception e) {
+	} catch (e) {
 		console.error("JSON parse error " + e.message);
 	}
 
