@@ -29,6 +29,7 @@ xmlHttp.onload = function() {
 	}
 
 	let msg = data.message;
+	let incidentsList = null;
 	for (let i = 0; i < msg.length; i++) {
 		let liElem = document.createElement("li");
 		let iconElem = document.createElement("i");
@@ -41,12 +42,17 @@ xmlHttp.onload = function() {
 		} else if (msg[i].status.indexOf('medium') !== -1) {
 			liElem.setAttribute('class', 'medium fade');
 			iconElem.setAttribute('class', 'fas fa-exclamation');
+			incidentsList = createIncidents(msg[i].incidents);
 		} else {
 			liElem.setAttribute('class', 'high fade');
 			iconElem.setAttribute('class', 'fas fa-times');
+			incidentsList = createIncidents(msg[i].incidents);
 		}
 		p.appendChild(iconElem);
 		liElem.appendChild(p);
+		if (incidentsList) {
+			liElem.appendChild(incidentsList);
+		}
 		productsList.appendChild(liElem);
 
 		liElem.classList.remove('fade');
@@ -63,6 +69,19 @@ xmlHttp.onerror = function() {
 
 xmlHttp.send();
 
+
+function createIncidents(incidents) {
+	let list = document.createElement('ul');
+	for (let i = 0; i < incidents.length; i++) {
+		let listItem = document.createElement('li');
+		let anchorItem = document.createElement('a');
+		anchorItem.href = incidents[i];
+		listItem.appendChild(anchorItem);
+		list.appendChild(listItem);
+	}
+	
+
+}
 
 function parseJson(json) {
 	let data = null;
