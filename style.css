@@ -15,8 +15,8 @@ h1, h2, h3 {
 }
 
 .loader {
-  display: inline-block;
-  position: relative;
+  margin: auto;
+  margin-top: 5%;
   width: 64px;
   height: 64px;
 }
