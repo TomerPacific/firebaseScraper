@@ -80,7 +80,9 @@ function createIncidents(incidents) {
 		list.appendChild(listItem);
 	}
 	
-
+	list.setAttribute("class", "incidents");
+	
+	return list;
 }
 
 function parseJson(json) {
