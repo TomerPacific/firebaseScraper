@@ -29,12 +29,12 @@ h1, h2, h3 {
   height: 0;
   margin: 6px;
   box-sizing: border-box;
-  border: 26px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: lds-hourglass 1.2s infinite;
+  border: 26px solid #85C1E9;
+  border-color: #85C1E9 transparent #85C1E9 transparent;
+  animation: spin 1.2s infinite;
 }
 
-@keyframes lds-hourglass {
+@keyframes spin {
   0% {
     transform: rotate(0);
     animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
