@@ -53,7 +53,10 @@ app.get('/firebase', function (req, res) {
 
       let statuses = cheerio('.end-bubble', html);
       for (let i = 0; i < products.length; i++) {
-        products[i].status = statuses[i].attribs.class;
+        var productStatus = statuses[i];
+        if (productStatus && productStatus.attribs) {
+          products[i].status = productStatus.attribs.class;
+        }
       }
 
       lastDateScraped = new Date();
