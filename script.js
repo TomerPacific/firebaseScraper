@@ -35,7 +35,7 @@ xmlHttp.onload = function() {
 		let iconElem = document.createElement("i");
 		let p = document.createElement("p");
 		p.innerHTML = "<strong>" + msg[i].name + "</strong>";
-		if (msg[i].status.indexOf('ok') !== -1) {
+		if (msg[i] && msg[i].status && msg[i].status.indexOf('ok') !== -1) {
 			liElem.setAttribute('class', 'ok fade');
 			iconElem.setAttribute('class', 'fas fa-check');
 			
