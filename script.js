@@ -39,7 +39,7 @@ xmlHttp.onload = function() {
 			liElem.setAttribute('class', 'ok fade');
 			iconElem.setAttribute('class', 'fas fa-check');
 			
-		} else if (msg[i].status.indexOf('medium') !== -1) {
+		} else if (msg[i] && msg[i].status && msg[i].status.indexOf('medium') !== -1) {
 			liElem.setAttribute('class', 'medium fade');
 			iconElem.setAttribute('class', 'fas fa-exclamation');
 			incidentsList = createIncidents(msg[i].incidents);
