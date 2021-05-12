@@ -25,6 +25,7 @@ xmlHttp.onload = function() {
 
 	let data = parseJson(responseText);
 	if (!data) {
+		loader[0].style.display = "none";
 		return;
 	}
 
@@ -65,6 +66,7 @@ xmlHttp.onload = function() {
 
 xmlHttp.onerror = function() {
 	console.log("Error");
+	loader[0].style.display = "none";
 };
 
 xmlHttp.send();
