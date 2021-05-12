@@ -25,7 +25,7 @@ xmlHttp.onload = function() {
 
 	let data = parseJson(responseText);
 	if (!data) {
-		loader[0].style.display = "none";
+		showErrorMessage("An error occurred on the server side. Please try again later.");
 		return;
 	}
 
@@ -65,8 +65,7 @@ xmlHttp.onload = function() {
 };
 
 xmlHttp.onerror = function() {
-	console.log("Error");
-	loader[0].style.display = "none";
+	showErrorMessage("An error occurred on the server side. Please try again later.");
 };
 
 xmlHttp.send();
@@ -102,4 +101,9 @@ function setCurrentDate() {
 	var currentDate = new Date();
 	dateHeader.innerHTML = "For the day of : " + months[currentDate.getMonth()] + ' ' + currentDate.getDate() + ' ' + currentDate.getFullYear();
 	dateHeader.style.display = "block";
+}
+
+function showErrorMessage(errMsg) {
+	loader[0].style.display = "none";
+	mainDiv.innerHTML = errMsg ? errMsg : "An error occurred. Please try again later.";
 }
